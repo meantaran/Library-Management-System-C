@@ -53,6 +53,27 @@ void addBook() {
     printf("\nBook Added Successfully!\n");
 }
 
+void displayBooks() {
+    int i;
+
+    if (bookCount == 0) {
+        printf("\nNo books available!\n");
+        return;
+    }
+
+    printf("\nID\tName\t\tQty\tIssued\tAvailable\n");
+    printf("------------------------------------------------\n");
+
+    for (i = 0; i < bookCount; i++) {
+        printf("%d\t%s\t\t%d\t%d\t%d\n",
+               library[i].id,
+               library[i].name,
+               library[i].quantity,
+               library[i].issued,
+               library[i].quantity - library[i].issued);
+    }
+}
+
 int main() {
     int choice;
 
@@ -68,6 +89,8 @@ int main() {
 
         if (choice == 1) {
             addBook();
+        } else if (choice == 2) {
+            displayBooks();
         } else if (choice == 0) {
             printf("\nExiting... Thank you!\n");
             break;
@@ -78,4 +101,5 @@ int main() {
 
     return 0;
 }
+
 
