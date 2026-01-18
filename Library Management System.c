@@ -74,6 +74,48 @@ void displayBooks() {
     }
 }
 
+void issueBook() {
+    int id, index;
+
+    printf("\nEnter Book ID to Issue: ");
+    scanf("%d", &id);
+
+    index = findBook(id);
+
+    if (index == -1) {
+        printf("Book not found!\n");
+        return;
+    }
+
+    if (library[index].quantity - library[index].issued > 0) {
+        library[index].issued++;
+        printf("Book Issued Successfully!\n");
+    } else {
+        printf("No copies available!\n");
+    }
+}
+
+void returnBook() {
+    int id, index;
+
+    printf("\nEnter Book ID to Return: ");
+    scanf("%d", &id);
+
+    index = findBook(id);
+
+    if (index == -1) {
+        printf("Book not found!\n");
+        return;
+    }
+
+    if (library[index].issued > 0) {
+        library[index].issued--;
+        printf("Book Returned Successfully!\n");
+    } else {
+        printf("No issued copies to return!\n");
+    }
+}
+
 int main() {
     int choice;
 
@@ -91,15 +133,20 @@ int main() {
             addBook();
         } else if (choice == 2) {
             displayBooks();
+        } else if (choice == 3) {
+            issueBook();
+        } else if (choice == 4) {
+            returnBook();
         } else if (choice == 0) {
             printf("\nExiting... Thank you!\n");
             break;
         } else {
-            printf("\nFeature not added yet!\n");
+            printf("\nInvalid choice!\n");
         }
     }
 
     return 0;
 }
+
 
 
